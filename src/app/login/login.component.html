@@ -1,0 +1,34 @@
+<div id="header" >
+    <div class="container"  >
+        <div class="row">
+            <div class="col-md-6 jobs_index_middle_panels"  style="margin-top:10%;">
+                <div class="card">
+                   
+                    <div class="card-header" style="background-color:#0d416b;color:#ffffff;"><p class="text-center">Sign In your account</p>  </div>
+                    <div class="card-body">
+                        <form [formGroup]="loginForm" novalidate> 
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Username</label>
+                              <input type="email" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                        
+                            <button type="submit" (click)="authenticateUser()"   *ngIf="!showSubmit" style="float: center;" class="btn btn-primary">Sign In</button>
+                            <button type="submit" *ngIf="showSubmit" class="submit-button" disabled>
+                              Please Wait.
+                              
+          
+                          </button>
+          
+                          </form>
+                    </div>
+                </div>
+            </div>
+      </div>
+       
+      </div>
+</div>
+ 

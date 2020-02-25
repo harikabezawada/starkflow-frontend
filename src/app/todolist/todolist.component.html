@@ -1,0 +1,117 @@
+<div class="card" style="width: 60rem;margin-left: 20rem;margin-top: 5rem;">
+
+    <div class="card-body">
+        <button style="float:right;" type="button" class="btn btn-primary" (click)="showaddNoteModal(addModal)">create Note</button>
+        <div class="container">
+
+            <h2>Notes List</h2>
+            <div class="loader" *ngIf="loader" ></div>
+            <table class="table table-hover" *ngIf="!loader&&notesList?.length">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>            
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let note of notesList">
+                        <td>{{note.title}}</td>
+                        <td>{{note.description}}</td>
+                        <!-- <td (click)="showData(viewModal,note)"><i class="fa fa-eye" style="font-size: 20px;" aria-hidden="true" ></i></td> -->
+                        <td>
+                            <i (click)="showData(editModal,note)" class="fa fa-pencil" style="font-size: 20px;" aria-hidden="true"></i>
+                        </td>
+                        <td (click)="deleteNotes(note)"><i class="fa fa-trash-o" style="font-size: 20px;" aria-hidden="true"></i></td>
+                    </tr>
+                  
+                </tbody>
+            </table>
+            <p-paginator [rows]="10" [first]="first" (onPageChange)="setPage($event)" [totalRecords]="notesCount" pageLinkSize="3" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+        </div>
+    </div>
+</div>
+<ng-template #addModal let-c="close" let-d="dismiss" style="width:100rem;">
+    <div class="modal-header"
+        style="background-color:#0d416b;color:#ffffff;border-top-left-radius: 0rem !important;border-top-right-radius: 0rem !important;">
+        <h4 class="modal-title" style="margin-left:15px;">New Note</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true " style="color:#ffffff;margin-left:-2.5rem;">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" >
+        <form class="container" [formGroup]="addNoteForm" >
+            
+            <div class="form-group">
+              
+              <input type="text" class="form-control" id="exampleInputPassword1" formControlName="title" placeholder="Title">
+            </div>
+            <div class="form-group form-check">
+               
+              <textarea class="form-check-input" formControlName="description" placeholder="Description" cols="80" id="exampleCheck1"></textarea>
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <div class="form-group" style="margin-top:6%;">
+                <button type="submit" style="float: right;" class="btn btn-primary" (click)="addNote()">Save</button>
+            </div>
+
+
+          
+          </form>
+
+
+</div>
+</ng-template>
+<ng-template #viewModal let-c="close" let-d="dismiss" style="width:100rem;">
+    <div class="modal-header"
+        style="background-color:#0d416b;color:#ffffff;border-top-left-radius: 0rem !important;border-top-right-radius: 0rem !important;">
+        <h4 class="modal-title" style="margin-left:15px;">New Note</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true " style="color:#ffffff;margin-left:-2.5rem;">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" >
+        <span>title : {{currentNote.title}}</span>
+        <span>title : {{currentNote.description}}</span>
+
+
+</div>
+</ng-template>
+<ng-template #editModal let-c="close" let-d="dismiss" style="width:100rem;">
+    <div class="modal-header"
+        style="background-color:#0d416b;color:#ffffff;border-top-left-radius: 0rem !important;border-top-right-radius: 0rem !important;">
+        <h4 class="modal-title" style="margin-left:15px;">Edit Note</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true " style="color:#ffffff;margin-left:-2.5rem;">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" >
+        <form class="container" [formGroup]="addNoteForm" >
+            
+            <div class="form-group">
+              
+              <input type="text" class="form-control" id="exampleInputPassword1" formControlName="title" placeholder="Title">
+            </div>
+            <div class="form-group form-check">
+               
+              <textarea class="form-check-input" formControlName="description" placeholder="Description" cols="80" id="exampleCheck1"></textarea>
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <div class="form-group" style="margin-top:6%;">
+                <button type="submit" style="float: right;" class="btn btn-primary" (click)="editNote()">Edit</button>
+            </div>
+
+
+          
+          </form>
+
+
+</div>
+</ng-template>
+<p-confirmDialog  [(visible)]="display" appendTo="body" #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

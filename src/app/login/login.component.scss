@@ -1,0 +1,39 @@
+#header {
+    /* The image used */
+    background-image: url("/assets/images/bg.jpg");
+    opacity: 0.8;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-attachment: fixed;
+    -o-background-size: cover;
+    background-size: cover;
+background-position: center center;
+    width:165rem;
+    height: 100rem;
+    
+
+ 
+  }
+
+  .card {
+    // margin-top: 50px;
+    box-shadow: 0 0 30px black;
+    //padding:0 15px 0 15px;
+}
+  #login-form{
+    width: 384px;
+    max-width: 384px;
+    padding: 32px;
+    text-align: center;
+    background-color: #FFFFFF;
+    transform: translateY(-20%);
+    // @include mat-elevation(16);
+
+    // @include media-breakpoint('xs') {
+    //     padding: 24px;
+    //     width: 100%;
+    // }
+   
+  }
+
+  
